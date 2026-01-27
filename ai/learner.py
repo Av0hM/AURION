@@ -24,4 +24,4 @@ class Learner:
         for k in self.traits:
             self.traits[k] = max(0.0, min(1.0, self.traits[k]))
 
-        print("📚 Learner updated:", self.traits)
+        print("Learner updated:", self.traits)

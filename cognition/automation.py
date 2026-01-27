@@ -1,5 +1,3 @@
-# cognition/automation.py
-
 def emit_actions(state: str):
     """
     Returns list of automation signals

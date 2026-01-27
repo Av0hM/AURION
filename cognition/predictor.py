@@ -1,4 +1,3 @@
-# cognition/predictor.py
 import numpy as np
 
 def stress_risk(recent_df) -> float:

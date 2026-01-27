@@ -1,4 +1,3 @@
-# cognition/learning.py
 import numpy as np
 
 def best_focus_window(df):

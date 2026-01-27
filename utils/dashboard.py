@@ -2,7 +2,7 @@ import sys
 import os
 
 ROOT_DIR = os.path.dirname(os.path.abspath(__file__))
-ROOT_DIR = os.path.dirname(ROOT_DIR)  # go one level up
+ROOT_DIR = os.path.dirname(ROOT_DIR)
 sys.path.append(ROOT_DIR)
 
 import streamlit as st
@@ -19,29 +19,29 @@ from utils.control import read_control
 
 # ================= CONFIG =================
 st.set_page_config(
-    page_title="Omni‑God | Neural Command Center",
+    page_title="AURION | Neural Command Center",
     page_icon="🧠",
     layout="wide"
 )
 
 # ================= TIME CONFIG =================
-STALE_THRESHOLD_SECONDS = 120  # 2 minutes
+STALE_THRESHOLD_SECONDS = 240
 
 CONTROL_FILE = "memory/control.json"
 
-def write_control_file(omni_mode):
-    if omni_mode == "OFF":
+def write_control_file(aurion_mode):
+    if aurion_mode == "OFF":
         backend_enabled = False
         logging_enabled = False
-    elif omni_mode == "OBSERVE":
+    elif aurion_mode == "OBSERVE":
         backend_enabled = True
         logging_enabled = True
-    else:  # ACTIVE
+    else:
         backend_enabled = True
         logging_enabled = True
 
     data = {
-        "omni_mode": omni_mode,
+        "aurion_mode": aurion_mode,
         "backend_enabled": backend_enabled,
         "logging_enabled": logging_enabled,
         "last_updated": int(time.time())
@@ -55,7 +55,7 @@ def write_control_file(omni_mode):
 def read_control_file():
     if not os.path.exists(CONTROL_FILE):
         return {
-            "omni_mode": "OFF",
+            "aurion_mode": "OFF",
             "backend_enabled": False,
             "logging_enabled": False
         }
@@ -65,7 +65,7 @@ def read_control_file():
             return json.load(f)
     except Exception:
         return {
-            "omni_mode": "OFF",
+            "aurion_mode": "OFF",
             "backend_enabled": False,
             "logging_enabled": False
         }
@@ -219,38 +219,38 @@ tab_live, tab_summary = st.tabs(
 # ================= LIVE TAB ==========================
 # =====================================================
 with tab_live:
-    # ================= OMNI‑GOD MODE =================
-    if "omni_mode" not in st.session_state:
-        st.session_state.omni_mode = "OFF"
+    # ================= AURION MODE =================
+    if "aurion_mode" not in st.session_state:
+        st.session_state.aurion_mode = "OFF"
 
-    st.session_state.omni_mode = st.radio(
-        "🧠 Omni‑God Mode",
+    st.session_state.aurion_mode = st.radio(
+        "🧠 AURION Mode",
         ["OFF", "OBSERVE", "ACTIVE"],
         horizontal=True,
-        help="Control whether Omni‑God rests, observes, or actively intervenes"
+        help="Control whether AURION rests, observes, or actively intervenes"
     )
 
-    OMNI_MODE = st.session_state.omni_mode
+    AURION_MODE = st.session_state.aurion_mode
 
-    # 🔹 WRITE CONTROL FILE ON CHANGE
+    #  WRITE CONTROL FILE ON CHANGE
     if "last_mode" not in st.session_state:
         st.session_state.last_mode = None
 
-    if OMNI_MODE != st.session_state.last_mode:
-        write_control_file(OMNI_MODE)
-        st.session_state.last_mode = OMNI_MODE
+    if AURION_MODE != st.session_state.last_mode:
+        write_control_file(AURION_MODE)
+        st.session_state.last_mode = AURION_MODE
 
     # 🔹 READ CONTROL FILE BACK (UI TRUTH)
     control = read_control()
 
     st.caption(
-        f"🧭 Omni‑God Mode: **{control['omni_mode']}** | "
+        f"🧭 AURION Mode: **{control['aurion_mode']}** | "
         f"Backend: {'🟢 Running' if control['backend_enabled'] else '🔴 Paused'} | "
         f"Logging: {'📝 On' if control['logging_enabled'] else '⛔ Off'}"
     )
 
     # ================= OFF MODE =================
-    if OMNI_MODE == "OFF":
+    if AURION_MODE == "OFF":
         st.markdown("""
         <style>
         .stApp {
@@ -259,7 +259,7 @@ with tab_live:
         </style>
         """, unsafe_allow_html=True)
 
-        st.markdown("## 💤 Omni‑God is Resting")
+        st.markdown("## 💤 AURION is Resting")
         st.caption("No cognition is being observed. No predictions, no interventions.")
         st.stop()
 
@@ -305,15 +305,15 @@ with tab_live:
         current = recent.iloc[idx]
 
     # ---------- AUTO REFRESH ----------
-    if OMNI_MODE == "ACTIVE" and is_live and not pause and not dev_mode and control["backend_enabled"]:
+    if AURION_MODE == "ACTIVE" and is_live and not pause and not dev_mode and control["backend_enabled"]:
         st_autorefresh(interval=2000, key="live_refresh")
 
 
     # ---------- BACKGROUND REACTIVITY ----------
-    if OMNI_MODE != "OFF":
+    if AURION_MODE != "OFF":
         focus = SCORE_MAP.get(current["state"], 50)
 
-    if OMNI_MODE == "ACTIVE":
+    if AURION_MODE == "ACTIVE":
         if current["state"] == "STRESSED":
             bias, energy = 0, 0.65
         elif current["state"] == "DEEP_WORK":
@@ -326,7 +326,7 @@ with tab_live:
         # OBSERVE MODE — calm neutral
         bias, energy = 220, 0.35
 
-    pulse = 1 + (focus / 250 if OMNI_MODE == "ACTIVE" else 0.02)
+    pulse = 1 + (focus / 250 if AURION_MODE == "ACTIVE" else 0.02)
 
     st.markdown(f"""
     <style>
@@ -341,12 +341,12 @@ with tab_live:
     # ---------- HERO ----------
     st.markdown(f"""
     <div class="card">
-        <h1>🧠 Omni‑God Neural Command Center</h1>
+        <h1>🧠 AURION Neural Command Center</h1>
         <p class="small">{current["timestamp"]}</p>
         <h2>{current["state"].replace("_"," ").title()}</h2>
     </div>
     """, unsafe_allow_html=True)
-    st.caption(f"🔒 Omni‑God Mode: **{OMNI_MODE}**")
+    st.caption(f"🔒 AURION Mode: **{AURION_MODE}**")
 
     # ---------- METRICS ----------
     m1, m2, m3, m4 = st.columns(4)
@@ -383,7 +383,7 @@ with tab_live:
     # ---------- THOUGHTS ----------
     reason = current.get("reason", "")
     if not reason.strip():
-        reason = "Omni is silently observing."
+        reason = "AURION is silently observing."
     st.info(reason)
 
     # ---------- VOICE ----------
@@ -426,12 +426,12 @@ with tab_live:
 
     # ================= PREDICTION =================
     risk = None
-    if OMNI_MODE in ["OBSERVE", "ACTIVE"]:
+    if AURION_MODE in ["OBSERVE", "ACTIVE"]:
         risk = stress_risk(recent.tail(10))
         st.info(f"🧠 Predicted stress risk: {int(risk * 100)}%")
 
     # ================= INTERVENTION =================
-    if OMNI_MODE == "ACTIVE" and risk is not None:
+    if AURION_MODE == "ACTIVE" and risk is not None:
         action = recommend_intervention(
             current["state"],
             risk,
@@ -441,7 +441,7 @@ with tab_live:
             st.warning(action)
 
     # ================= AUTOMATION =================
-    if OMNI_MODE == "ACTIVE":
+    if AURION_MODE == "ACTIVE":
         actions = emit_actions(current["state"])
         if actions:
             st.markdown("### 🤖 Automation Signals")

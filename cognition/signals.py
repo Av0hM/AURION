@@ -1,5 +1,3 @@
-# cognition/signals.py
-
 def derive_intensity(state: str) -> float:
     """
     Returns cognitive intensity [0–1] from state

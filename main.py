@@ -16,7 +16,7 @@ try:
 except ImportError:
     VOICE_ENABLED = False
 
-print("🧠 Omni‑God backend starting... Press Ctrl+C to stop.")
+print("🧠 AURION backend starting... Press Ctrl+C to stop.")
 
 learner = Learner()
 LOOP_DELAY = 2
@@ -28,7 +28,7 @@ while True:
         # =====================================================
         control = read_control()
 
-        omni_mode = control.get("omni_mode", "OFF")
+        aurion_mode = control.get("aurion_mode", "OFF")
         backend_enabled = control.get("backend_enabled", False)
         logging_enabled = control.get("logging_enabled", False)
 
@@ -36,7 +36,7 @@ while True:
         # 🛑 OFF MODE → backend fully paused
         # =====================================================
         if not backend_enabled:
-            print("🛑 Omni‑God backend paused (OFF mode)")
+            print("🛑 AURION backend paused (OFF mode)")
             time.sleep(2)
             continue
 
@@ -54,7 +54,7 @@ while True:
         # ⏱️ FORCE SYSTEM TIME (single source of truth)
         # =====================================================
         brain["timestamp"] = now_unix()
-        brain["omni_mode"] = omni_mode
+        brain["aurion_mode"] = aurion_mode
 
         # =====================================================
         # 📝 LOGGING (OBSERVE + ACTIVE)
@@ -65,14 +65,14 @@ while True:
         # =====================================================
         # 🖨️ DEBUG OUTPUT
         # =====================================================
-        print("\n🧠 AI OUTPUT @", now_unix())
+        print("\n🧠 GEMINI 3 OUTPUT @", now_unix())
         for k, v in brain.items():
             print(f"{k}: {v}")
 
         # =====================================================
         # 🔊 VOICE + SIDE‑EFFECTS (ACTIVE ONLY)
         # =====================================================
-        if omni_mode == "ACTIVE" and VOICE_ENABLED and can_speak():
+        if aurion_mode == "ACTIVE" and VOICE_ENABLED and can_speak():
             result = generate_voice_line(
                 state=brain.get("state"),
                 intent=brain.get("intent"),
@@ -93,7 +93,7 @@ while True:
         time.sleep(LOOP_DELAY)
 
     except KeyboardInterrupt:
-        print("\n🛑 Omni‑God backend stopped.")
+        print("\n🛑 AURION backend stopped.")
         break
 
     except Exception as e:

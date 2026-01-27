@@ -1,4 +1,3 @@
-# to be called once only
 import json
 import os
 
@@ -41,4 +40,4 @@ class Learner:
             self.traits[k] = max(0.0, min(1.0, self.traits[k]))
 
         self.save()
-        print("📚 Learner updated:", self.traits)
+        print("Learner updated:", self.traits)

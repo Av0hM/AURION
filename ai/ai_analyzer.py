@@ -78,7 +78,6 @@ def analyze_state(frame):
     confidence = safe_float(parsed.get("confidence", 0.5))
     reason = parsed.get("reason", "")
 
-    # 🔑 RETURN FULL BRAIN (THIS FIXES EVERYTHING)
     return {
         "state": state,
         "intensity": intensity,
