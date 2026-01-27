@@ -1,29 +1,29 @@
 Software and Libraries
-	Gemini API Key (for cognition, reasoning, and prediction)
-  StreamLit (dashboard & control interface)
-  Computer vision libraries (frame capture & analysis)
-	Data libraries (JSON, Pandas)
+1. Gemini API Key (for cognition, reasoning, and prediction)
+2. StreamLit (dashboard & control interface)
+3. Computer vision libraries (frame capture & analysis)
+4. Data libraries (JSON, Pandas)
 
 System utilities
-psutil>=5.9.5
-Desktop / laptop system
-Python 3.9+
-Stable Internet connection
+1. psutil>=5.9.5
+2. Desktop / laptop system
+3. Python 3.9+
+4. Stable Internet connection
 
 Permissions Required
-  Screen access (to observe on‑screen activity)
-  System time access (for accurate cognitive logging)
-  Local file read/write (logs, memory, control states)
-  Microphone access (optional) — only if voice feedback is enabled
-  pyaudio>=0.2.13
-  sounddevice>=0.4.6
+1. Screen access (to observe on‑screen activity)
+2. System time access (for accurate cognitive logging)
+3. Local file read/write (logs, memory, control states)
+4. Microphone access (optional) — only if voice feedback is enabled
+5. pyaudio>=0.2.13
+6. sounddevice>=0.4.6
 
 Operational Requirements
-  User‑controlled mode selection: OFF / OBSERVE / ACTIVE
-  Backend explicitly started via dashboard (not auto‑running)
-	Logs generated only in OBSERVE and ACTIVE modes
+1. User‑controlled mode selection: OFF / OBSERVE / ACTIVE
+2. Backend explicitly started via dashboard (not auto‑running)
+3. Logs generated only in OBSERVE and ACTIVE modes
 
 Privacy and Safety 
-	All data stored locally
-	No background execution without user consent
-	No interventions unless ACTIVE mode is enabled
+1. All data stored locally
+2. No background execution without user consent
+3. No interventions unless ACTIVE mode is enabled
