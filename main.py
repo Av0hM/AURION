@@ -98,4 +98,4 @@ while True:
 
     except Exception as e:
         print("❌ Backend error:", e)
-        time.sleep(5)
+        time.sleep(45)
