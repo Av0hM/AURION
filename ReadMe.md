@@ -106,7 +106,7 @@ This ensures:
 
 AURION supports two modes of time.
 
-### 🟢 Live Mode
+###  Live Mode
 - Anchored to system time  
 - Shows what is happening now  
 - Auto‑refreshes  
@@ -114,7 +114,7 @@ AURION supports two modes of time.
 
 This is monitoring.
 
-### 🎬 Replay Mode
+###  Replay Mode
 - Anchored to log time  
 - Lets you scrub through past cognition  
 - Analyze transitions  
@@ -284,20 +284,6 @@ AURION becomes a **persistent cognitive companion**.
 ## 18. Final Summary
 
 **AURION is a self‑observing cognitive system that helps humans understand, predict, and safely regulate their own mental states over time.**
-
----
-
-## 19. What You’ve Actually Built
-
-You didn’t build a dashboard.  
-You built:
-
-- a cognitive telemetry system  
-- with prediction and learning  
-- explicit consent  
-- ethical control boundaries  
-- research‑grade analytics  
-- real deployment semantics  
 
 ---
 
