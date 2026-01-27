@@ -1,0 +1,7 @@
+import cv2
+from system.vision.frame_provider import get_combined_frame
+
+frame = get_combined_frame()
+cv2.imshow("TEST", frame)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
