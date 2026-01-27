@@ -1,0 +1,20 @@
+AURION (Adaptive Unified Reasoning & Intelligence Orchestrator)- 
+Authors & Contributions
+
+1. Saksham Mishra
+   - System architecture & design
+   - Backend cognition loop
+   - Control‑plane (OFF / OBSERVE / ACTIVE)
+   - Dashboard logic & state handling
+   - Prediction + intervention integration
+   - Deployment semantics
+   - Safety & consent boundaries
+
+2. Pragati Garg
+   - AI cognition design
+   - Model logic & Gemini integration
+   - Cognitive state modeling
+   - Prediction strategy
+   - UX flow & interaction design
+   - Documentation & presentation narrative
+   - Research framing of the system
