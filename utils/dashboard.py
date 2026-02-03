@@ -28,6 +28,20 @@ st.set_page_config(
     layout="wide"
 )
 
+def reset_aurion():
+    if os.path.exists(STATE_LOG):
+        with open(STATE_LOG, "w") as f:
+            json.dump([], f)
+
+    if os.path.exists(VOICE_LOG):
+        with open(VOICE_LOG, "w") as f:
+            json.dump([], f)
+
+    write_control_file("OFF")
+
+    st.session_state.omni_mode = "OFF"
+    st.session_state.last_mode = None
+
 # ================= TIME CONFIG =================
 STALE_THRESHOLD_SECONDS = 240
 
@@ -226,6 +240,13 @@ with tab_live:
     # ================= AURION MODE =================
     if "aurion_mode" not in st.session_state:
         st.session_state.aurion_mode = "OFF"
+    
+    st.markdown("### ⚠️ System Controls")
+
+    if st.button("🔄 Reset AURION (Clear All Data)", type="primary"):
+        reset_aurion()
+        st.success("AURION has been reset. All logs cleared. System is now OFF.")
+        st.experimental_rerun()
 
     st.session_state.aurion_mode = st.radio(
         "🧠 AURION Mode",
