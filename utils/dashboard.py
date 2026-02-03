@@ -29,18 +29,35 @@ st.set_page_config(
 )
 
 def reset_aurion():
-    if os.path.exists(STATE_LOG):
-        with open(STATE_LOG, "w") as f:
-            json.dump([], f)
+    # 1. Safely reset state logs
+    try:
+        if os.path.exists(STATE_LOG):
+            with open(STATE_LOG, "w") as f:
+                json.dump([], f)
+    except Exception:
+        pass
 
-    if os.path.exists(VOICE_LOG):
-        with open(VOICE_LOG, "w") as f:
-            json.dump([], f)
+    # 2. Safely reset voice logs
+    try:
+        if os.path.exists(VOICE_LOG):
+            with open(VOICE_LOG, "w") as f:
+                json.dump([], f)
+    except Exception:
+        pass
 
-    write_control_file("OFF")
+    # 3. Reset control mode to OFF
+    try:
+        write_control_file("OFF")
+    except Exception:
+        pass
 
-    st.session_state.omni_mode = "OFF"
-    st.session_state.last_mode = None
+    # 4. Reset Streamlit session state (NO crashes)
+    st.session_state["omni_mode"] = "OFF"
+    st.session_state["last_mode"] = None
+
+    # 5. Optional UX message (no red error)
+    st.toast("AURION reset. Waiting for new cognition data…", icon="🔄")
+
 
 # ================= TIME CONFIG =================
 STALE_THRESHOLD_SECONDS = 240
@@ -305,13 +322,13 @@ with tab_live:
 
     # ---- Decide which data to show ----
     if seconds_since_last_log <= STALE_THRESHOLD_SECONDS:
-    # 🟢 Fresh data — normal live behavior
+    #  Fresh data — normal live behavior
         cutoff = now - timedelta(minutes=minutes)
         recent = df[df["timestamp"] >= cutoff]
         data_mode = "LIVE"
 
     else:
-        # 🟡 Stale data — fallback to last known window
+        #  Stale data — fallback to last known window
         cutoff = latest_log_time - timedelta(minutes=minutes)
         recent = df[df["timestamp"] >= cutoff]
         data_mode = "STALE"
