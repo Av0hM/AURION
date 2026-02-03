@@ -1,1 +1,93 @@
-{}
+[
+  {
+    "timestamp": 1706980000,
+    "speaker": "aurion",
+    "text": "Session started. Cognitive signals show mild restlessness. No intervention required.",
+    "state_context": "NORMAL_WORK",
+    "confidence": 0.60
+  },
+  {
+    "timestamp": 1706980030,
+    "speaker": "aurion",
+    "text": "Attention variability detected. Task switching increasing.",
+    "state_context": "PROCRASTINATING",
+    "confidence": 0.48
+  },
+  {
+    "timestamp": 1706980060,
+    "speaker": "aurion",
+    "text": "Stress indicators rising faster than focus stability.",
+    "state_context": "STRESSED",
+    "confidence": 0.32
+  },
+  {
+    "timestamp": 1706980090,
+    "speaker": "aurion",
+    "text": "High cognitive load detected. Consider slowing pace or narrowing task scope.",
+    "state_context": "STRESSED",
+    "confidence": 0.30
+  },
+  {
+    "timestamp": 1706980120,
+    "speaker": "aurion",
+    "text": "Short hyperfocus window detected. Distraction suppression effective.",
+    "state_context": "DEEP_WORK",
+    "confidence": 0.72
+  },
+  {
+    "timestamp": 1706980150,
+    "speaker": "aurion",
+    "text": "Sustained focus achieved, but energy expenditure is high.",
+    "state_context": "DEEP_WORK",
+    "confidence": 0.70
+  },
+  {
+    "timestamp": 1706980180,
+    "speaker": "aurion",
+    "text": "Cognitive fatigue emerging after hyperfocus burst.",
+    "state_context": "TIRED",
+    "confidence": 0.44
+  },
+  {
+    "timestamp": 1706980210,
+    "speaker": "aurion",
+    "text": "Confidence drop detected. Anxiety likely influencing decision certainty.",
+    "state_context": "STRESSED",
+    "confidence": 0.29
+  },
+  {
+    "timestamp": 1706980240,
+    "speaker": "aurion",
+    "text": "Stability improving with external structure. Intervention not required.",
+    "state_context": "NORMAL_WORK",
+    "confidence": 0.55
+  },
+  {
+    "timestamp": 1706980270,
+    "speaker": "aurion",
+    "text": "Cognitive state stabilizing. Focus remains fragile.",
+    "state_context": "NORMAL_WORK",
+    "confidence": 0.58
+  },
+  {
+    "timestamp": 1706980300,
+    "speaker": "aurion",
+    "text": "Task nearing completion. Stress indicators decreasing.",
+    "state_context": "NORMAL_WORK",
+    "confidence": 0.65
+  },
+  {
+    "timestamp": 1706980330,
+    "speaker": "aurion",
+    "text": "Task completed. Short‑term confidence rebound observed.",
+    "state_context": "VICTORY",
+    "confidence": 0.78
+  },
+  {
+    "timestamp": 1706980360,
+    "speaker": "aurion",
+    "text": "Post‑completion relief detected. Monitoring continues in observe mode.",
+    "state_context": "VICTORY",
+    "confidence": 0.80
+  }
+]
