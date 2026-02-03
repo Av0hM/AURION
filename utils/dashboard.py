@@ -53,18 +53,35 @@ st.set_page_config(
 )
 
 def reset_aurion():
-    if os.path.exists(STATE_LOG):
-        with open(STATE_LOG, "w") as f:
-            json.dump([], f)
+    # 1. Safely reset state logs
+    try:
+        if os.path.exists(STATE_LOG):
+            with open(STATE_LOG, "w") as f:
+                json.dump([], f)
+    except Exception:
+        pass
 
-    if os.path.exists(VOICE_LOG):
-        with open(VOICE_LOG, "w") as f:
-            json.dump([], f)
+    # 2. Safely reset voice logs
+    try:
+        if os.path.exists(VOICE_LOG):
+            with open(VOICE_LOG, "w") as f:
+                json.dump([], f)
+    except Exception:
+        pass
 
-    write_control_file("OFF")
+    # 3. Reset control mode to OFF
+    try:
+        write_control_file("OFF")
+    except Exception:
+        pass
 
-    st.session_state.omni_mode = "OFF"
-    st.session_state.last_mode = None
+    # 4. Reset Streamlit session state (NO crashes)
+    st.session_state["omni_mode"] = "OFF"
+    st.session_state["last_mode"] = None
+
+    # 5. Optional UX message (no red error)
+    st.toast("AURION reset. Waiting for new cognition data…", icon="🔄")
+    st.stop()
 
 # ================= TIME CONFIG =================
 STALE_THRESHOLD_SECONDS = 240
@@ -199,7 +216,23 @@ VOICE_LOG = "memory/logs/voice_log.json"
 
 # ================= LOAD DATA =================
 if not os.path.exists(STATE_LOG):
-    st.error("No state logs found.")
+    st.info("🧠 AURION is idle. Waiting for cognition data…")
+    st.stop()
+
+try:
+    raw = json.load(open(STATE_LOG))
+except Exception:
+    st.info("🧠 Waiting for backend logs…")
+    st.stop()
+
+if not raw:
+    st.info("🧠 Backend running but no cognition data yet.")
+    st.stop()
+
+df = pd.DataFrame(raw)
+
+if "timestamp" not in df.columns:
+    st.info("🧠 No timestamps yet. Waiting for backend…")
     st.stop()
 
 data = json.load(open(STATE_LOG))
@@ -276,7 +309,6 @@ with tab_live:
     if st.button("🔄 Reset AURION (Clear All Data)", type="primary"):
         reset_aurion()
         st.success("AURION has been reset. All logs cleared. System is now OFF.")
-        st.experimental_rerun()
 
     st.session_state.aurion_mode = st.radio(
         "🧠 AURION Mode",
@@ -335,13 +367,13 @@ with tab_live:
 
     # ---- Decide which data to show ----
     if seconds_since_last_log <= STALE_THRESHOLD_SECONDS:
-    # 🟢 Fresh data — normal live behavior
+    #  Fresh data — normal live behavior
         cutoff = now - timedelta(minutes=minutes)
         recent = df[df["timestamp"] >= cutoff]
         data_mode = "LIVE"
 
     else:
-        # 🟡 Stale data — fallback to last known window
+        #  Stale data — fallback to last known window
         cutoff = latest_log_time - timedelta(minutes=minutes)
         recent = df[df["timestamp"] >= cutoff]
         data_mode = "STALE"
@@ -443,10 +475,20 @@ with tab_live:
 
     # ---------- VOICE ----------
     st.markdown("## 🔊 Voice Transcript")
+
     if os.path.exists(VOICE_LOG):
-        vdf = pd.DataFrame(json.load(open(VOICE_LOG)))
-        vdf["timestamp"] = pd.to_datetime(vdf["timestamp"], unit="s")
-        st.table(vdf.tail(10))
+        try:
+            vdf = pd.DataFrame(json.load(open(VOICE_LOG)))
+            if not vdf.empty:
+                if "timestamp" in vdf.columns:
+                    vdf["timestamp"] = pd.to_datetime(
+                        vdf["timestamp"], unit="s", errors="coerce"
+                    )
+                st.table(vdf.tail(10))
+            else:
+                st.caption("Voice log is empty.")
+        except Exception:
+            st.caption("Voice log unreadable.")
     else:
         st.caption("No voice output yet.")
 
