@@ -9,13 +9,17 @@ import streamlit as st
 import json
 import time
 import pandas as pd
-from streamlit_autorefresh import st_autorefresh
 from cognition.predictor import stress_risk
 from cognition.intervention import recommend_intervention
 from cognition.learning import best_focus_window, cognitive_entropy
 from cognition.automation import emit_actions
 from datetime import datetime, timedelta
 from utils.control import read_control
+try:
+    from streamlit_autorefresh import st_autorefresh
+    AUTOREFRESH_AVAILABLE = True
+except Exception:
+    AUTOREFRESH_AVAILABLE = False
 
 # ================= CONFIG =================
 st.set_page_config(
@@ -306,8 +310,8 @@ with tab_live:
 
     # ---------- AUTO REFRESH ----------
     if AURION_MODE == "ACTIVE" and is_live and not pause and not dev_mode and control["backend_enabled"]:
-        st_autorefresh(interval=2000, key="live_refresh")
-
+        if AUTOREFRESH_AVAILABLE:
+            st_autorefresh(interval=2000, key="live_refresh")
 
     # ---------- BACKGROUND REACTIVITY ----------
     if AURION_MODE != "OFF":
