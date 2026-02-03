@@ -17,8 +17,6 @@ from cognition.learning import best_focus_window, cognitive_entropy
 from cognition.automation import emit_actions
 from datetime import datetime, timedelta
 from utils.control import read_control
-import sys
-st.write("DASHBOARD PYTHON:", sys.executable)
 try:
     from streamlit_autorefresh import st_autorefresh
     AUTOREFRESH_AVAILABLE = True
@@ -34,7 +32,6 @@ BACKEND_PATH = os.path.join(ROOT_DIR, "main.py")
 
 if "backend_started" not in st.session_state:
     if os.path.exists(BACKEND_PATH):
-        st.write("🚀 Starting backend...")
         st.session_state.backend_process = subprocess.Popen(
             [sys.executable, "-u", BACKEND_PATH],
             cwd=ROOT_DIR,
