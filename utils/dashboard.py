@@ -210,9 +210,15 @@ df = pd.DataFrame(raw)
 if "timestamp" not in df.columns:
     st.info("🧠 No timestamps yet. Waiting for backend…")
     st.stop()
+    
+data = json.load(open(STATE_LOG))
 
-df["timestamp"] = pd.to_datetime(df["timestamp"], unit="s")
-
+if not data:
+    df = pd.DataFrame(columns=["timestamp", "state", "confidence", "intensity", "reason"])
+else:
+    df = pd.DataFrame(data)
+    if "timestamp" in df.columns:
+        df["timestamp"] = pd.to_datetime(df["timestamp"], unit="s")
 
 # ================= SANITIZATION & FALLBACKS =================
 
