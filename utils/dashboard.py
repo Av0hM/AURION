@@ -311,7 +311,7 @@ with tab_live:
     # ---------- AUTO REFRESH ----------
     if AURION_MODE == "ACTIVE" and is_live and not pause and not dev_mode and control["backend_enabled"]:
         if AUTOREFRESH_AVAILABLE:
-    st_autorefresh(interval=2000, key="live_refresh")
+            st_autorefresh(interval=2000, key="live_refresh")
 
     # ---------- BACKGROUND REACTIVITY ----------
     if AURION_MODE != "OFF":
