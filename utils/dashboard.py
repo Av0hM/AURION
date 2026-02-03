@@ -443,20 +443,19 @@ with tab_live:
 
     # ---------- VOICE ----------
     st.markdown("## 🔊 Voice Transcript")
+
     if os.path.exists(VOICE_LOG):
-       vraw = json.load(open(VOICE_LOG))
+       vdf = pd.DataFrame(json.load(open(VOICE_LOG)))
 
-    if not vraw:
-        st.caption("No voice output yet.")
-    else:
-        vdf = pd.DataFrame(vraw)
-    if "timestamp" in vdf.columns:
-        vdf["timestamp"] = pd.to_datetime(vdf["timestamp"], unit="s")
-    st.table(vdf.tail(10))
+       if not vdf.empty:
+         if "timestamp" in vdf.columns:
+            vdf["timestamp"] = pd.to_datetime(vdf["timestamp"], unit="s", errors="coerce")
 
-        st.table(vdf.tail(10))
+         st.table(vdf.tail(10))
+        else:
+           st.caption("Voice log is empty.")
     else:
-        st.caption("No voice output yet.")
+       st.caption("No voice output yet.")
 
     # ---------- GRAPHS ----------
     st.markdown("## 📈 Neural Activity")
