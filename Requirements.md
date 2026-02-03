@@ -6,9 +6,10 @@ Software and Libraries
 
 System utilities
 1. psutil>=5.9.5
-2. Desktop / laptop system
-3. Python 3.9+
-4. Stable Internet connection
+2. streamlit-autorefresh>=1.0.1
+3. Desktop / laptop system
+4. Python 3.9+
+5. Stable Internet connection
 
 Permissions Required
 1. Screen access (to observe on‑screen activity)
