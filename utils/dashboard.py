@@ -27,24 +27,6 @@ except Exception:
 
 # ================= START BACKEND PROCESS =================
 
-import subprocess
-import sys
-import os
-
-BACKEND_PATH = os.path.join(ROOT_DIR, "main.py")
-
-if "backend_started" not in st.session_state:
-    if os.path.exists(BACKEND_PATH):
-        st.write("🚀 Starting backend...")
-        st.session_state.backend_process = subprocess.Popen(
-            [sys.executable, "-u", BACKEND_PATH],
-            cwd=ROOT_DIR,
-            env=os.environ
-        )
-        st.session_state.backend_started = True
-    else:
-        st.error(f"Backend not found at {BACKEND_PATH}")
-
 # ================= CONFIG =================
 st.set_page_config(
     page_title="AURION | Neural Command Center",
@@ -235,14 +217,7 @@ if "timestamp" not in df.columns:
     st.info("🧠 No timestamps yet. Waiting for backend…")
     st.stop()
 
-data = json.load(open(STATE_LOG))
-
-if not data:
-    df = pd.DataFrame(columns=["timestamp", "state", "confidence", "intensity", "reason"])
-else:
-    df = pd.DataFrame(data)
-    if "timestamp" in df.columns:
-        df["timestamp"] = pd.to_datetime(df["timestamp"], unit="s")
+df["timestamp"] = pd.to_datetime(df["timestamp"], unit="s")
 
 # ================= SANITIZATION & FALLBACKS =================
 
