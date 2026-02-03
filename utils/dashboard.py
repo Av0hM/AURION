@@ -26,6 +26,23 @@ except Exception:
     AUTOREFRESH_AVAILABLE = False
 
 # ================= START BACKEND PROCESS =================
+import subprocess
+import sys
+import os
+
+BACKEND_PATH = os.path.join(ROOT_DIR, "main.py")
+
+if "backend_started" not in st.session_state:
+    if os.path.exists(BACKEND_PATH):
+        st.write("🚀 Starting backend...")
+        st.session_state.backend_process = subprocess.Popen(
+            [sys.executable, "-u", BACKEND_PATH],
+            cwd=ROOT_DIR,
+            env=os.environ
+        )
+        st.session_state.backend_started = True
+    else:
+        st.error(f"Backend not found at {BACKEND_PATH}")
 
 # ================= CONFIG =================
 st.set_page_config(
