@@ -263,7 +263,7 @@ with tab_live:
     if st.button("🔄 Reset AURION (Clear All Data)", type="primary"):
         reset_aurion()
         st.success("AURION has been reset. All logs cleared. System is now OFF.")
-        st.experimental_rerun()
+        st.rerun()()
 
     st.session_state.aurion_mode = st.radio(
         "🧠 AURION Mode",
