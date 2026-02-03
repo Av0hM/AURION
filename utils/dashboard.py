@@ -195,8 +195,20 @@ if not os.path.exists(STATE_LOG):
     st.error("No state logs found.")
     st.stop()
 
-df = pd.DataFrame(json.load(open(STATE_LOG)))
+raw = json.load(open(STATE_LOG))
+
+if not raw:
+    st.info("🧠 AURION is idle. Waiting for cognition data…")
+    st.stop()
+
+df = pd.DataFrame(raw)
+
+if "timestamp" not in df.columns:
+    st.info("🧠 No timestamps yet. Waiting for backend…")
+    st.stop()
+
 df["timestamp"] = pd.to_datetime(df["timestamp"], unit="s")
+
 
 # ================= SANITIZATION & FALLBACKS =================
 
@@ -263,7 +275,8 @@ with tab_live:
     if st.button("🔄 Reset AURION (Clear All Data)", type="primary"):
         reset_aurion()
         st.success("AURION has been reset. All logs cleared. System is now OFF.")
-        st.rerun()()
+    st.rerun()
+
 
     st.session_state.aurion_mode = st.radio(
         "🧠 AURION Mode",
@@ -431,8 +444,16 @@ with tab_live:
     # ---------- VOICE ----------
     st.markdown("## 🔊 Voice Transcript")
     if os.path.exists(VOICE_LOG):
-        vdf = pd.DataFrame(json.load(open(VOICE_LOG)))
+       vraw = json.load(open(VOICE_LOG))
+
+    if not vraw:
+        st.caption("No voice output yet.")
+    else:
+        vdf = pd.DataFrame(vraw)
+    if "timestamp" in vdf.columns:
         vdf["timestamp"] = pd.to_datetime(vdf["timestamp"], unit="s")
+    st.table(vdf.tail(10))
+
         st.table(vdf.tail(10))
     else:
         st.caption("No voice output yet.")
