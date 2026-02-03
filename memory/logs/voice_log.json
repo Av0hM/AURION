@@ -4,7 +4,7 @@
     "speaker": "aurion",
     "text": "Session started. Cognitive signals show mild restlessness. No intervention required.",
     "state_context": "NORMAL_WORK",
-    "confidence": 0.60
+    "confidence": 0.6
   },
   {
     "timestamp": 1706980030,
@@ -25,7 +25,7 @@
     "speaker": "aurion",
     "text": "High cognitive load detected. Consider slowing pace or narrowing task scope.",
     "state_context": "STRESSED",
-    "confidence": 0.30
+    "confidence": 0.3
   },
   {
     "timestamp": 1706980120,
@@ -39,7 +39,7 @@
     "speaker": "aurion",
     "text": "Sustained focus achieved, but energy expenditure is high.",
     "state_context": "DEEP_WORK",
-    "confidence": 0.70
+    "confidence": 0.7
   },
   {
     "timestamp": 1706980180,
@@ -79,15 +79,20 @@
   {
     "timestamp": 1706980330,
     "speaker": "aurion",
-    "text": "Task completed. Short‑term confidence rebound observed.",
+    "text": "Task completed. Short\u00e2\u20ac\u2018term confidence rebound observed.",
     "state_context": "VICTORY",
     "confidence": 0.78
   },
   {
     "timestamp": 1706980360,
     "speaker": "aurion",
-    "text": "Post‑completion relief detected. Monitoring continues in observe mode.",
+    "text": "Post\u00e2\u20ac\u2018completion relief detected. Monitoring continues in observe mode.",
     "state_context": "VICTORY",
-    "confidence": 0.80
+    "confidence": 0.8
+  },
+  {
+    "timestamp": 1770152892.977401,
+    "text": "It\u2019s good to see you in such a steady rhythm. You seem to have found a solid pace for this.",
+    "tone": "neutral"
   }
 ]

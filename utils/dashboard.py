@@ -9,17 +9,41 @@ import streamlit as st
 import json
 import time
 import pandas as pd
+import threading
+import subprocess
 from cognition.predictor import stress_risk
 from cognition.intervention import recommend_intervention
 from cognition.learning import best_focus_window, cognitive_entropy
 from cognition.automation import emit_actions
 from datetime import datetime, timedelta
 from utils.control import read_control
+import sys
+st.write("DASHBOARD PYTHON:", sys.executable)
 try:
     from streamlit_autorefresh import st_autorefresh
     AUTOREFRESH_AVAILABLE = True
 except Exception:
     AUTOREFRESH_AVAILABLE = False
+
+# ================= START BACKEND PROCESS =================
+
+import subprocess
+import sys
+import os
+
+BACKEND_PATH = os.path.join(ROOT_DIR, "main.py")
+
+if "backend_started" not in st.session_state:
+    if os.path.exists(BACKEND_PATH):
+        st.write("🚀 Starting backend...")
+        st.session_state.backend_process = subprocess.Popen(
+            [sys.executable, "-u", BACKEND_PATH],
+            cwd=ROOT_DIR,
+            env=os.environ
+        )
+        st.session_state.backend_started = True
+    else:
+        st.error(f"Backend not found at {BACKEND_PATH}")
 
 # ================= CONFIG =================
 st.set_page_config(
@@ -178,8 +202,14 @@ if not os.path.exists(STATE_LOG):
     st.error("No state logs found.")
     st.stop()
 
-df = pd.DataFrame(json.load(open(STATE_LOG)))
-df["timestamp"] = pd.to_datetime(df["timestamp"], unit="s")
+data = json.load(open(STATE_LOG))
+
+if not data:
+    df = pd.DataFrame(columns=["timestamp", "state", "confidence", "intensity", "reason"])
+else:
+    df = pd.DataFrame(data)
+    if "timestamp" in df.columns:
+        df["timestamp"] = pd.to_datetime(df["timestamp"], unit="s")
 
 # ================= SANITIZATION & FALLBACKS =================
 

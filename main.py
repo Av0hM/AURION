@@ -9,6 +9,9 @@ from ai.learner import Learner
 from utils.control import read_control
 from utils.timebase import now_unix
 
+import sys
+print("BACKEND PYTHON:", sys.executable)
+
 try:
     from voice.voice_engine import speak
     from voice.voice_generator import generate_voice_line, can_speak

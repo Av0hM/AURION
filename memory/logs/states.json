@@ -1,82 +1,16 @@
 [
   {
-    "timestamp": 1706980000,
+    "timestamp": 1770152879.1704931,
     "state": "NORMAL_WORK",
-    "intent": "Start task",
-    "decision": "Opened IDE",
-    "persona": "Hopeful",
-    "confidence": 0.62,
-    "intensity": 0.55,
-    "reason": "Beginning work session with mild restlessness"
+    "intent": "WORK",
+    "decision": "CONTINUE",
+    "persona": "SUPPORTIVE"
   },
   {
-    "timestamp": 1706980030,
-    "state": "PROCRASTINATING",
-    "intent": "Avoid task",
-    "decision": "Switched tabs repeatedly",
-    "persona": "Distracted",
-    "confidence": 0.42,
-    "intensity": 0.30,
-    "reason": "Attention drift and impulse to avoid complexity"
-  },
-  {
-    "timestamp": 1706980060,
-    "state": "STRESSED",
-    "intent": "Catch up",
-    "decision": "Multitasking",
-    "persona": "Overwhelmed",
-    "confidence": 0.28,
-    "intensity": 0.25,
-    "reason": "Anxiety spike due to perceived time pressure"
-  },
-  {
-    "timestamp": 1706980090,
-    "state": "DEEP_WORK",
-    "intent": "Focus intensely",
-    "decision": "Silenced distractions",
-    "persona": "Locked‑in",
-    "confidence": 0.70,
-    "intensity": 0.88,
-    "reason": "Short hyperfocus window triggered by urgency"
-  },
-  {
-    "timestamp": 1706980120,
-    "state": "TIRED",
-    "intent": "Maintain focus",
-    "decision": "Slowed typing",
-    "persona": "Drained",
-    "confidence": 0.38,
-    "intensity": 0.40,
-    "reason": "Cognitive fatigue after hyperfocus burst"
-  },
-  {
-    "timestamp": 1706980150,
-    "state": "STRESSED",
-    "intent": "Finish task",
-    "decision": "Rereading same code",
-    "persona": "Anxious",
-    "confidence": 0.26,
-    "intensity": 0.22,
-    "reason": "Looping thoughts and fear of mistakes"
-  },
-  {
-    "timestamp": 1706980180,
+    "timestamp": 1770152890.1017957,
     "state": "NORMAL_WORK",
-    "intent": "Regain control",
-    "decision": "Structured checklist",
-    "persona": "Stabilizing",
-    "confidence": 0.52,
-    "intensity": 0.50,
-    "reason": "External structure reduces anxiety temporarily"
-  },
-  {
-    "timestamp": 1706980210,
-    "state": "VICTORY",
-    "intent": "Complete task",
-    "decision": "Submitted work",
-    "persona": "Relieved",
-    "confidence": 0.78,
-    "intensity": 0.72,
-    "reason": "Task completion gives short confidence rebound"
+    "intent": "WORK",
+    "decision": "CONTINUE",
+    "persona": "SUPPORTIVE"
   }
 ]
