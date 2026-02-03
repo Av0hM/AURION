@@ -452,7 +452,7 @@ with tab_live:
             vdf["timestamp"] = pd.to_datetime(vdf["timestamp"], unit="s", errors="coerce")
 
          st.table(vdf.tail(10))
-        else:
+       else:
            st.caption("Voice log is empty.")
     else:
        st.caption("No voice output yet.")
