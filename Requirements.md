@@ -12,7 +12,7 @@ System utilities
 5. Stable Internet connection
 6. streamlit
 7. google-genai
-8. opencv-python-headless
+8. opencv-python-headless(cv2)
 
 Permissions Required
 1. Screen access (to observe on‑screen activity)
