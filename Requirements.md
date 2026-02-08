@@ -10,6 +10,9 @@ System utilities
 3. Desktop / laptop system
 4. Python 3.9+
 5. Stable Internet connection
+6. streamlit
+7. google-genai
+8. opencv-python-headless
 
 Permissions Required
 1. Screen access (to observe on‑screen activity)
