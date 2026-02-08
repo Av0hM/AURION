@@ -1,7 +1,7 @@
 Software and Libraries
 1. Gemini API Key (for cognition, reasoning, and prediction)
 2. StreamLit (dashboard & control interface)
-3. Computer vision libraries (frame capture & analysis)
+3. opencv-python (frame capture & analysis)
 4. Data libraries (JSON, Pandas)
 
 System utilities
@@ -10,9 +10,6 @@ System utilities
 3. Desktop / laptop system
 4. Python 3.9+
 5. Stable Internet connection
-6. streamlit
-7. google-genai
-8. opencv-python-headless(cv2)
 
 Permissions Required
 1. Screen access (to observe on‑screen activity)
